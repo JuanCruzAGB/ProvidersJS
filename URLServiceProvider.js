@@ -7,7 +7,7 @@ export class URLServiceProvider{
     /**
      * * Returns the URL #hash.
      * @static
-     * @returns
+     * @returns {String} If exist the URL hash parameter, else false.
      * @memberof URLServiceProvider
      */
     static findHashParameter(){
@@ -21,8 +21,8 @@ export class URLServiceProvider{
     /**
      * * Returns an specific URL parameter.
      * @static
-     * @param {*} parameterName
-     * @returns
+     * @param {String} parameterName Parameter name
+     * @returns {String|Array} If a parameter name is given returns the parameter in case there is, else returns all the URL parameters.
      * @memberof URLServiceProvider
      */
     static findGetParameter(parameterName){
@@ -45,6 +45,7 @@ export class URLServiceProvider{
     /**
      * * Returns the route without the #hash.
      * @static
+     * @returns {String} the URL location pathname.
      * @memberof URLServiceProvider
      */
     static findOriginalRoute(){
