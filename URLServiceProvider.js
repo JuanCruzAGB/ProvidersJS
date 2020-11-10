@@ -43,7 +43,7 @@ export class URLServiceProvider{
     }
 
     /**
-     * * Returns the route without the #hash.
+     * * Returns the route pathname.
      * @static
      * @returns {String} the URL location pathname.
      * @memberof URLServiceProvider
