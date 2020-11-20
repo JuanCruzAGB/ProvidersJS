@@ -285,7 +285,7 @@ export class FetchServiceProvider{
                     instance.setResponse(data);
                 }).catch(error => console.error(error));
         }else{
-            console.error('The URL & Method are required.');
+            console.error('The URL & Method are required');
         }
         return instance;
     }
