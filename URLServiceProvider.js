@@ -1,13 +1,13 @@
 /**
- * * URLServiceProvider controls the URL correctly.
+ * * URLServiceProvider gives an excellent URL service.
  * @export
  * @class URLServiceProvider
  */
 export class URLServiceProvider{
     /**
-     * * Returns the URL #hash.
+     * * Returns the URL #hash parameter if exist.
      * @static
-     * @returns {String} If exist the URL hash parameter, else false.
+     * @returns {String|false}
      * @memberof URLServiceProvider
      */
     static findHashParameter(){
@@ -19,23 +19,29 @@ export class URLServiceProvider{
     }
 
     /**
-     * * Returns an specific URL parameter.
+     * * Returns the URL parameters or an specific parameter.
      * @static
-     * @param {String} parameterName Parameter name
-     * @returns {String|Array} If a parameter name is given returns the parameter in case there is, else returns all the URL parameters.
+     * @param {String} paramenter Parameter name.
+     * @returns {Array|String}
      * @memberof URLServiceProvider
      */
-    static findGetParameter(parameterName){
+    static findGetParameter(paramenter = ''){
         var result = false;
         let parameters = window.location.href.split('?').pop().split('&');
         let auxParams = []
         for(let param of parameters){
             auxParams.push({key: param.split('=').shift(), value: param.split('=').pop()});
-            if(param.split('=').shift() == parameterName){
-                result = param.split('=').pop();
+            if (/=/.exec(param)) {
+                if(param.split('=').shift() == paramenter){
+                    result = param.split('=').pop();
+                }
+            } else {
+                if(param == paramenter){
+                    result = true;
+                }
             }
         }
-        if(parameterName){
+        if(paramenter != ''){
             return result;
         }else{
             return auxParams;
@@ -43,9 +49,9 @@ export class URLServiceProvider{
     }
 
     /**
-     * * Returns the route pathname.
+     * * Returns the route path name without the #hash.
      * @static
-     * @returns {String} the URL location pathname.
+     * @returns {String}
      * @memberof URLServiceProvider
      */
     static findOriginalRoute(){

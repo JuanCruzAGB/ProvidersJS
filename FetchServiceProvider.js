@@ -1,18 +1,18 @@
 /**
- * * Controls a fetch function.
+ * * FetchServiceProvider gives an excellent fetch service.
  * @export
  * @class FetchServiceProvider
  */
 export class FetchServiceProvider{
     /**
      * * Creates an instance of FetchServiceProvider.
-     * @param {Object} properties FetchServiceProvider properties.
+     * @param {Object} properties FetchServiceProvider properties:
      * @param {String} properties.url Fetch URL.
      * @param {String} properties.method Fetch method.
      * @memberof FetchServiceProvider
      */
     constructor(properties = {
-        url: undefined,
+        url: '',
         method: 'GET',
     }){
         this.setProperties(properties);
@@ -20,57 +20,90 @@ export class FetchServiceProvider{
 
     /**
      * * Set the FetchServiceProvider properties.
-     * @param {Object} properties FetchServiceProvider properties.
+     * @param {Object} properties FetchServiceProvider properties:
      * @param {String} properties.url Fetch URL.
      * @param {String} properties.method Fetch method.
      * @memberof FetchServiceProvider
      */
     setProperties(properties = {
-        url: undefined,
+        url: '',
         method: 'GET',
     }){
         this.properties = {};
-        this.setURL(properties);
-        this.setMethod(properties);
+        this.setURLProperty(properties);
+        this.setMethodProperty(properties);
     }
 
     /**
-     * * Set the Fetch URL.
-     * @param {Object} properties FetchServiceProvider properties.
-     * @param {String} properties.url Fetch URL.
+     * * Returns the FetchServiceProvider properties or an specific property.
+     * @param {String} property Property name.
+     * @returns {Object|*}
      * @memberof FetchServiceProvider
      */
-    setURL(properties = {
-        url: undefined,
-    }){
-        if (properties.hasOwnProperty('url')) {
-            this.properties.url = properties.url;
+    getProperties(property = ''){
+        if (property && property != '') {
+            return this.properties[property];
         } else {
-            this.properties.url = undefined;
+            return this.properties;
         }
     }
 
     /**
-     * * Set the Fetch method.
-     * @param {Object} properties FetchServiceProvider properties.
+     * * Set the FetchServiceProvider URL.
+     * @param {Object} properties FetchServiceProvider properties:
+     * @param {String} properties.url Fetch URL.
      * @param {String} properties.method Fetch method.
      * @memberof FetchServiceProvider
      */
-    setMethod(properties = {
+    setURLProperty(properties = {
+        url: '',
+    }){
+        if (properties.hasOwnProperty('url')) {
+            this.properties.url = properties.url;
+        } else {
+            this.properties.url = '';
+        }
+    }
+
+    /**
+     * * Returns the FetchServiceProvider URL.
+     * @returns {String}
+     * @memberof FetchServiceProvider
+     */
+    getURLProperty(){
+        return this.properties.url;
+    }
+
+    /**
+     * * Set the FetchServiceProvider method.
+     * @param {Object} properties FetchServiceProvider properties:
+     * @param {String} properties.method Fetch method.
+     * @memberof FetchServiceProvider
+     */
+    setMethodProperty(properties = {
         method: 'GET',
     }){
         if (properties.hasOwnProperty('method')) {
-            this.properties.method = properties.method.toUpperCase();
+            this.properties.method = properties.method;
         } else {
             this.properties.method = 'GET';
         }
     }
 
     /**
+     * * Returns the FetchServiceProvider method.
+     * @returns {String}
+     * @memberof FetchServiceProvider
+     */
+    getMethodProperty(){
+        return this.properties.method;
+    }
+
+    /**
      * * Set the FetchServiceProvider response.
-     * @param {Object} status FetchServiceProvider response status.
+     * @param {Object} status FetchServiceProvider response status:
      * @param {Number} status.code FetchServiceProvider response status code.
-     * @param {*} status.data FetchServiceProvider response status data.
+     * @param {*} status.data FetchServiceProvider response data.
      * @param {String} status.message FetchServiceProvider response status message.
      * @memberof FetchServiceProvider
      */
@@ -80,37 +113,32 @@ export class FetchServiceProvider{
         message: undefined,
     }){
         this.status = {};
-        this.setCode(status);
-        this.setData(status);
-        this.setMessage(status);
+        this.setResponseCode(status);
+        this.setResponseData(status);
+        this.setResponseMessage(status);
     }
 
     /**
-     * * Returns the FetchServiceProvider response or an specific property.
-     * @param {String} property Property name to get.
-     * @returns {*} The response or a property.
+     * * Returns the FetchServiceProvider response status or an specific status property.
+     * @param {String} property Status property name.
+     * @returns {Object|*}
      * @memberof FetchServiceProvider
      */
     getResponse(property = ''){
-        switch (property) {
-            case 'code':
-                return this.status.code;
-            case 'data':
-                return this.status.data;
-            case 'message':
-                return this.status.message;
-            default:
-                return this.status;
+        if (property && property != '') {
+            return this.status[property];
+        } else {
+            return this.status;
         }
     }
 
     /**
-     * * Set the status code.
-     * @param {Object} status FetchServiceProvider response status.
+     * * Set the FetchServiceProvider response status code.
+     * @param {Object} status FetchServiceProvider response status:
      * @param {Number} status.code FetchServiceProvider response status code.
      * @memberof FetchServiceProvider
      */
-    setCode(status = {
+    setResponseCode(status = {
         code: 404,
     }){
         if (status.hasOwnProperty('code')) {
@@ -121,12 +149,21 @@ export class FetchServiceProvider{
     }
 
     /**
-     * * Set the status data.
-     * @param {Object} status FetchServiceProvider response status.
-     * @param {*} status.data FetchServiceProvider response status data.
+     * * Returns the FetchServiceProvider response status code.
+     * @returns {String}
      * @memberof FetchServiceProvider
      */
-    setData(status = {
+    getResponseCode(){
+        return this.status.code;
+    }
+
+    /**
+     * * Set the FetchServiceProvider response data.
+     * @param {Object} status FetchServiceProvider response status:
+     * @param {*} status.data FetchServiceProvider response data.
+     * @memberof FetchServiceProvider
+     */
+    setResponseData(status = {
         data: [],
     }){
         if (status.hasOwnProperty('data')) {
@@ -137,12 +174,21 @@ export class FetchServiceProvider{
     }
 
     /**
-     * * Set the status message.
-     * @param {Object} status FetchServiceProvider response status.
+     * * Returns the FetchServiceProvider response data.
+     * @returns {String}
+     * @memberof FetchServiceProvider
+     */
+    getResponseData(){
+        return this.status.data;
+    }
+
+    /**
+     * * Set the FetchServiceProvider response status message.
+     * @param {Object} status FetchServiceProvider response status:
      * @param {String} status.message FetchServiceProvider response status message.
      * @memberof FetchServiceProvider
      */
-    setMessage(status = {
+    setResponseMessage(status = {
         message: '',
     }){
         if (status.hasOwnProperty('message')) {
@@ -153,11 +199,21 @@ export class FetchServiceProvider{
     }
 
     /**
-     * * Get data with a fetch function.
+     * * Returns the FetchServiceProvider response status message.
+     * @returns {String}
+     * @memberof FetchServiceProvider
+     */
+    getResponseMessage(){
+        return this.status.message;
+    }
+
+    /**
+     * * Get data from an specific URL.
+     * @async
      * @static
-     * @param {String} URL URL to get data.
-     * @param {Object} headers Fetch headers.
-     * @returns {FetchServiceProvider} The FetchServiceProvider.
+     * @param {String} URL Fetch URL to get data.
+     * @param {*} headers Fetch URL headers.
+     * @returns {FetchServiceProvider}
      * @memberof FetchServiceProvider
      */
     static async getData(URL, headers = {}){
@@ -189,26 +245,26 @@ export class FetchServiceProvider{
                     }).catch(error => console.error(error));
             }
         }else{
-            console.error('No pasaste los datos man...');
+            console.error('The URL is required');
         }
         return instance;
     }
 
     /**
-     * * Set data with a fetch function.
+     * * Send data from an specific URl.
+     * @async
      * @static
-     * @param {Object} properties Fetch properties.
+     * @param {Object} properties FetchServiceProvider properties:
      * @param {String} properties.url Fetch URL.
      * @param {String} properties.method Fetch method.
-     * @memberof FetchServiceProvider
-     * @param {Object} headers Fetch headers.
+     * @param {*} headers Fetch URL headers.
      * @param {FormData} formdata Data to send.
-     * @returns {FetchServiceProvider} The FetchServiceProvider.
+     * @returns {FetchServiceProvider}
      * @memberof FetchServiceProvider
      */
-    static async setData(properties = {
-        url: null,
-        method: null,
+    static async sendData(properties = {
+        url: '',
+        method: '',
     }, headers = {}, formdata = []){
         let parsedFormData = {};
         for(const input of formdata){
@@ -218,18 +274,18 @@ export class FetchServiceProvider{
             url: properties.url,
             method: properties.method
         });
-        if(properties.url != null && properties.method != null){
-            await fetch(properties.url, {
+        if(instance.getURLProperty() != '' && instance.getMethodProperty() != 'GET'){
+            await fetch(instance.getURLProperty(), {
                 headers: headers,
                 credentials: 'same-origin',
-                method: properties.method,
+                method: instance.getMethodProperty(),
                 body: JSON.stringify(parsedFormData),
             }).then(response => response.json())
                 .then(data => {
                     instance.setResponse(data);
                 }).catch(error => console.error(error));
         }else{
-            console.error('No pasaste los datos man...');
+            console.error('The URL & Method are required');
         }
         return instance;
     }
