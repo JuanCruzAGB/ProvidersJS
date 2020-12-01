@@ -51,4 +51,14 @@ export class URLServiceProvider{
     static findOriginalRoute(){
         return window.location.pathname;
     }
+
+    /**
+     * * Returns the complete route.
+     * @static
+     * @returns {String} the URL location href.
+     * @memberof URLServiceProvider
+     */
+    static findCompleteRoute(){
+        return window.location.href;
+    }
 }
