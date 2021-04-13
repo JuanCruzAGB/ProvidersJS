@@ -1,18 +1,23 @@
+// ? JuanCruzAGB repository
+import Class from "../../JuanCruzAGB/js/Class.js";
+
 /**
  * * URLServiceProvider gives an excellent URL service.
  * @export
  * @class URLServiceProvider
+ * @extends Class
+ * @author Juan Cruz Armentia <juancarmentia@gmail.com
  */
-export class URLServiceProvider{
+export class URLServiceProvider extends Class {
     /**
      * * Returns the URL #hash parameter if exist.
      * @static
-     * @returns {String|false}
+     * @returns {string|false}
      * @memberof URLServiceProvider
      */
-    static findHashParameter(){
+    static findHashParameter () {
         let hash = /#/
-        if(!hash.exec(window.location.href)){
+        if (!hash.exec(window.location.href)) {
             return false;
         }
         return window.location.href.split('#').pop().split('?').shift();
@@ -21,29 +26,32 @@ export class URLServiceProvider{
     /**
      * * Returns the URL parameters or an specific parameter.
      * @static
-     * @param {String} paramenter Parameter name.
-     * @returns {Array|String}
+     * @param {string} paramenter Parameter name.
+     * @returns {array|string}
      * @memberof URLServiceProvider
      */
-    static findGetParameter(paramenter = ''){
+    static findGetParameter (paramenter = '') {
         var result = false;
         let parameters = window.location.href.split('?').pop().split('&');
         let auxParams = []
-        for(let param of parameters){
-            auxParams.push({key: param.split('=').shift(), value: param.split('=').pop()});
+        for (let param of parameters) {
+            auxParams.push({
+                key: param.split('=').shift(),
+                value: param.split('=').pop()
+            });
             if (/=/.exec(param)) {
-                if(param.split('=').shift() == paramenter){
+                if (param.split('=').shift() == paramenter) {
                     result = param.split('=').pop();
                 }
             } else {
-                if(param == paramenter){
+                if (param == paramenter) {
                     result = true;
                 }
             }
         }
-        if(paramenter != ''){
+        if (paramenter != '') {
             return result;
-        }else{
+        } else {
             return auxParams;
         }
     }
@@ -51,20 +59,20 @@ export class URLServiceProvider{
     /**
      * * Returns the route path name without the #hash.
      * @static
-     * @returns {String}
+     * @returns {string}
      * @memberof URLServiceProvider
      */
-    static findOriginalRoute(){
+    static findOriginalRoute () {
         return window.location.pathname;
     }
 
     /**
      * * Returns the complete route.
      * @static
-     * @returns {String} the URL location href.
+     * @returns {string} the URL location href.
      * @memberof URLServiceProvider
      */
-    static findCompleteRoute(){
+    static findCompleteRoute () {
         return window.location.href;
     }
 }
