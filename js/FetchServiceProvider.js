@@ -31,68 +31,68 @@ export class FetchServiceProvider extends Class {
 
     /**
      * * Set the FetchServiceProvider response.
-     * @param {object} [status] FetchServiceProvider response status:
-     * @param {number} [status.code=404] FetchServiceProvider response status code.
-     * @param {*} [status.data] FetchServiceProvider response data.
-     * @param {string} [status.message=''] FetchServiceProvider response status message.
+     * @param {object} [response] FetchServiceProvider response response:
+     * @param {number} [response.code=404] FetchServiceProvider response response code.
+     * @param {*} [response.data] FetchServiceProvider response data.
+     * @param {string} [response.message=''] FetchServiceProvider response response message.
      * @memberof FetchServiceProvider
      */
-    setResponse (status = {
+    setResponse (response = {
         code: 404,
         data: [],
         message: '',
     }) {
-        this.status = {};
-        this.setResponseCode(status);
-        this.setResponseData(status);
-        this.setResponseMessage(status);
+        this.response = {};
+        this.setResponseCode(response);
+        this.setResponseData(response);
+        this.setResponseMessage(response);
     }
 
     /**
-     * * Set the FetchServiceProvider response status code.
-     * @param {object} [status] FetchServiceProvider response status:
-     * @param {number} [status.code=404] FetchServiceProvider response status code.
+     * * Set the FetchServiceProvider response response code.
+     * @param {object} [response] FetchServiceProvider response response:
+     * @param {number} [response.code=404] FetchServiceProvider response response code.
      * @memberof FetchServiceProvider
      */
-    setResponseCode (status = {
+    setResponseCode (response = {
         code: 404,
     }) {
-        if (status.hasOwnProperty('code')) {
-            this.status.code = status.code;
+        if (response.hasOwnProperty('code')) {
+            this.response.code = response.code;
         } else {
-            this.status.code = 404;
+            this.response.code = 404;
         }
     }
 
     /**
      * * Set the FetchServiceProvider response data.
-     * @param {object} [status] FetchServiceProvider response status:
-     * @param {*} [status.data] FetchServiceProvider response data.
+     * @param {object} [response] FetchServiceProvider response response:
+     * @param {*} [response.data] FetchServiceProvider response data.
      * @memberof FetchServiceProvider
      */
-    setResponseData (status = {
+    setResponseData (response = {
         data: [],
     }) {
-        if (status.hasOwnProperty('data')) {
-            this.status.data = status.data;
+        if (response.hasOwnProperty('data')) {
+            this.response.data = response.data;
         } else {
-            this.status.data = [];
+            this.response.data = [];
         }
     }
 
     /**
-     * * Set the FetchServiceProvider response status message.
-     * @param {object} [status] FetchServiceProvider response status:
-     * @param {string} [status.message=''] FetchServiceProvider response status message.
+     * * Set the FetchServiceProvider response response message.
+     * @param {object} [response] FetchServiceProvider response response:
+     * @param {string} [response.message=''] FetchServiceProvider response response message.
      * @memberof FetchServiceProvider
      */
-    setResponseMessage (status = {
+    setResponseMessage (response = {
         message: '',
     }) {
-        if (status.hasOwnProperty('message')) {
-            this.status.message = status.message;
+        if (response.hasOwnProperty('message')) {
+            this.response.message = response.message;
         } else {
-            this.status.message = '';
+            this.response.message = '';
         }
     }
 
