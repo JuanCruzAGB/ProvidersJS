@@ -77,6 +77,7 @@ export class LocalStorageServiceProvider extends Class {
             }
             if (previousData) {
                 if (overwrite) {
+                    console.log(data);
                     localStorage.setItem(name, data);
                 } else {
                     let msg = 'There is previous data in the LocalStorage';
@@ -103,7 +104,8 @@ export class LocalStorageServiceProvider extends Class {
             name: name,
         });
         if (name && name != '' && this.has(name)) {
-            instance.setData(JSON.parse(localStorage.getItem(name)));
+            instance.setData('');
+            localStorage.removeItem(name);
         } else {
             console.error('The Name is required');
         }
